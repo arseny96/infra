@@ -1,22 +1,31 @@
-{
+ {
+        "variables": 
+          {
+            "proj_id": null,
+            "source_image": null
+          },
+
         "builders": [
           {
             "type": "googlecompute",
-            "project_id": "week-3-303113",
+            "project_id": "{{user `proj_id`}}",
             "image_name": "reddit-base-{{timestamp}}",
-            "source_image": "ubuntu-1604-xenial-v20210203",
+            "source_image": "{{user `source_image`}}",
             "zone": "europe-west1-b",
             "ssh_username": "appuser",
-            "machine_type": "e2-micro"
-} ],
+            "machine_type": "{{user `machine_type`}}"
+          }
+                    ],
         "provisioners": [
           {
             "type": "shell",
             "script": "scripts/install_ruby.sh"
           },
+          
           {
             "type": "shell",
             "script": "scripts/install_mongodb.sh",
             "execute_command": "sudo {{.Path}}"
-} ]
-}
+          }
+                        ]
+ }
