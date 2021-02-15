@@ -23,3 +23,9 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
+wget -O - https://raw.githubusercontent.com/arseny96/infra/base-on-packer/packer/files/autostart_redditapp.service
+
+mv autostart_redditapp.service /etc/systemd/system
+
+systemctl enable autostart_redditapp.service
+systemctl start autostart_redditapp
