@@ -1,0 +1,13 @@
+[Unit] 
+
+Description=autostart_redditapp
+After=network.target
+
+[Service]
+
+Type=simple
+ExecStart=/usr/local/bin/puma
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
