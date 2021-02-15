@@ -1,0 +1,41 @@
+ {
+        "variables":
+   
+          {
+            "proj_id": null,
+            "source_image": null
+          },
+
+        "builders":     [
+         
+          {
+            "type":                "googlecompute",
+            "project_id":          "{{user `proj_id`}}",
+            "image_name":          "reddit-base-{{timestamp}}",
+            "source_image":        "{{user `source_image`}}",
+            "image_description":   "packer image",
+            "zone":                "europe-west1-b",
+            "disk_size":           "10",
+            "disk_type":           "pd-standard",
+            "network":             "default",
+            "tags":                ["puma-server"],
+            "ssh_username":        "appuser",
+            "machine_type":        "{{user `machine_type`}}"
+          }
+                        ],
+
+        "provisioners": [
+         
+          {
+            "type":                "shell",
+            "script":              "scripts/startup_script.sh"
+          },
+          
+          {
+           "type":                 "file",
+           "source":               "files/autostart_redditapp.service",
+           "destination":          "tmp/autostart_redditapp.service"
+          }
+
+                        ]
+ }
