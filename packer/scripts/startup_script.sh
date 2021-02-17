@@ -32,5 +32,5 @@ wget -P /tmp https://raw.githubusercontent.com/arseny96/infra/base-on-packer/pac
 sudo mv /tmp/autostart_redditapp.service /etc/systemd/system
 sudo systemctl daemon-reload
 systemctl start autostart_redditapp.service
-sudo systemctl restart foo-daemon
+sudo systemctl restart autostart_redditapp.service
 systemctl enable autostart_redditapp
