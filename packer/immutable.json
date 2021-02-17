@@ -28,7 +28,8 @@
          
           {
             "type":                "shell",
-            "script":              "scripts/startup_script.sh"
+            "script":              "scripts/startup_script.sh",
+            "execute_command":     "sudo {{.Path}}"
           },
           
           {

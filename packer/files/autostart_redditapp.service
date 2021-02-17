@@ -6,7 +6,7 @@ After=network.target
 [Service]
 
 Type=simple
-ExecStart=/usr/local/bin/puma
+ExecStart=/usr/local/bin/puma --dir home/appuser/reddit
 Restart=always
 
 [Install]
