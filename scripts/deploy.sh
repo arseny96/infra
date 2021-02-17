@@ -7,6 +7,6 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
-sudo systemctl start reddit-start
+puma -d 
 
-sudo systemctl enable reddit-start
+ps aux | grep puma
