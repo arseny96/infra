@@ -1,20 +1,23 @@
 #!/bin/bash
 
-# install ruby and dependencies
 wget -O - https://raw.githubusercontent.com/arseny96/infra/base-on-packer/scripts/install_ruby.sh | sudo bash
 if [ $? -ne 0 ]; then
   echo "Failed to install ruby"
   exit 1
 fi
 
-# install db
+
+
+
 wget -O -  https://raw.githubusercontent.com/arseny96/infra/base-on-packer/scripts/install_mongodb.sh | sudo bash
 if [ $? -ne 0 ]; then
   echo "Failed to install mongo"
   exit 1
 fi
 
-# run app
+
+
+
 cd /home/appuser
 
 wget -O -  https://raw.githubusercontent.com/arseny96/infra/base-on-packer/scripts/deploy.sh | sudo bash
@@ -26,9 +29,8 @@ fi
 
 
 wget -P /tmp https://raw.githubusercontent.com/arseny96/infra/base-on-packer/packer/files/autostart_redditapp.service
-
-
 sudo mv /tmp/autostart_redditapp.service /etc/systemd/system
-
-systemctl enable autostart_redditapp.service
-systemctl start autostart_redditapp
+sudo systemctl daemon-reload
+systemctl start autostart_redditapp.service
+sudo systemctl restart foo-daemon
+systemctl enable autostart_redditapp
