@@ -54,5 +54,5 @@ resource "google_compute_firewall" "firewall_puma" {
 
 resource "google_compute_project_metadata_item" "metadata" {
 	key = "ssh-keys"
-	value = "vbn:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDXVx/Xuii7c/MkJaNJnCQXbSufH6GS2m05XYxIErWAZ0D2Q+2xOddOaW9LLEtTsnBvbfjI1CsULLgCrUWvormdmi1c8hepS2ZWtCaGti1hIEwRPo0EeBnuHRqxQ21dgLSICu/xj102tVVt7/dPQt/DSSLcYMKgNUsLvKow0CNQIpyUsOOIEivINSJGn5qDSsxYUEhYsr6mYgNAYIOWjb22CgE/wkRkcolKOZtK60D6COV+3gIkMZWAaoUG5+EBkfU7ZAWYIf7RZxTlpZDXgOcpnTvCm3zUN3GOiUVVWy8VkO3wdTelBYrQLZpOqS+jqPuegEV7l5ZlTDKFiZX03MsrdXgkAculFtF9h2KVJoHkYje2IJkltTrmgpOr9PQgGFlOr8sw9XaWyXDxW75KBjAtkXNu5/hLVH7iyFCnNw/+Xl/upd0cEExIRziGnE2ICmZ218zxgrfNjG2cI6Y2dF7SwpmHTXj47ubPlHOpSyw6fMXJ/wJM0dMm1Yb6fNCMD2c= vbn"
+	value = join("\n", var.ssh_keys)
 }
