@@ -1,4 +1,3 @@
-
 provider "google" {
   project = var.project
   region  = var.region
@@ -6,10 +5,11 @@ provider "google" {
 }
 
 resource "google_compute_instance" "app" {
-  name         = "reddit-app"
+  name         = "test-app-${count.index}"
   machine_type = "e2-micro"
   zone         = "europe-west1-b"
-  tags         = ["reddit-app"]
+  tags         = ["puma-server"]
+  count        = var.instance_count
   boot_disk {
     initialize_params {
       image = var.disk_image
@@ -26,18 +26,9 @@ resource "google_compute_instance" "app" {
   connection {
     type        = "ssh"
     user        = "appuser"
-    host        = google_compute_instance.app.network_interface.0.access_config.0.nat_ip
+    host        = self.network_interface[0].access_config[0].nat_ip
     agent       = false
     private_key = file(var.private_key_path)
-  }
-
-  provisioner "file" {
-    source      = "files/puma.service"
-    destination = "/tmp/puma.service"
-  }
-
-  provisioner "remote-exec" {
-    script = "files/deploy.sh"
   }
 
 }
@@ -45,12 +36,13 @@ resource "google_compute_instance" "app" {
 resource "google_compute_firewall" "firewall_puma" {
   name    = "allow-puma-default"
   network = "default"
+  project = var.project
   allow {
     protocol = "tcp"
     ports    = ["9292"]
   }
   source_ranges = ["0.0.0.0/0"]
-  target_tags   = ["reddit-app"]
+  target_tags   = ["puma-server"]
 }
 
 resource "google_compute_project_metadata_item" "metadata" {
