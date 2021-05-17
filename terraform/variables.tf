@@ -28,3 +28,6 @@ variable "disk_image" {
   description = "Disk image"
 }
 
+variable "instance_count" {
+  description = "Count of Instances" 
+}
