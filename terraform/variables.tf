@@ -1,5 +1,6 @@
 variable "project" {
   description = "Project ID"
+  default = "virtual-nimbus-313719"
 }
 
 variable "region" {
@@ -30,4 +31,14 @@ variable "disk_image" {
 
 variable "instance_count" {
   description = "Count of Instances" 
+}
+
+variable app_disk_image {
+  description = "Disk image for test app"
+  default = "testapp-base"
+}
+
+variable db_disk_image {
+  description = "Disk image for test app db"
+  default = "testapp-db-base"
 }
